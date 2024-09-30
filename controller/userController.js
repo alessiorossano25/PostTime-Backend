@@ -30,13 +30,13 @@ const userController = {
     },
 
     signup: async (req, res) => {
-        const { nickname, email, password } = req.body
+        const { name, surname, username, email, password } = req.body
         try {
             const existingUser = await User.findOne({ where: { [Op.or]: [{ email }] } });
             if (existingUser) {
                 return res.status(400).json({ error: "Utente già registrato" })
             }
-            const newUser = await User.create({ nickname, email, password })
+            const newUser = await User.create({ name, surname, username, email, password })
             //creazione token 
             const token = jwt.sign(
                 { userId: newUser.id }, 
@@ -128,4 +128,4 @@ const userController = {
 
 }
 
-module.exports = userController
+export default userController;

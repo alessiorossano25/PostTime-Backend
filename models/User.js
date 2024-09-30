@@ -1,9 +1,11 @@
-import database from "../database/connectDB";
+import { DataTypes } from "sequelize";
+import database from "../database/connectDB.js";
 import bcrypt from "bcrypt";
-
+import dotenv from "dotenv";
+dotenv.config();
 
 const User = database.define('User', {
-    nickname: {
+    username: {
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -19,13 +21,13 @@ const User = database.define('User', {
         type: DataTypes.STRING,
         allowNull: false,
         set(value) {
-            const hashedPassword = bcrypt.hashSync(value, 10)
-            this.setDataValue('passwordCript', hashedPassword)
+            const hashedPassword = bcrypt.hashSync(value, 10);
+            this.setDataValue('password', hashedPassword); // Corretto a 'password'
         }
     }
 }, {
     tableName: 'users',
     timestamps: false
-})
+});
 
-module.exports = User
+export default User;

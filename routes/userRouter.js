@@ -12,4 +12,4 @@ router.get('/auth', userController.auth);
 router.put('/profile/:id', userController.profile);
 router.delete ('/delete/:id', userController.deleteProfile);
 
-module.exports = router;
+export default router;
