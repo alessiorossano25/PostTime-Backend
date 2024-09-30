@@ -3,10 +3,10 @@ import express from "express";
 import session from "cookie-session";
 import cors from "cors";
 import bodyParser from "body-parser";
-import userRouter from "../routes/userRouter.js";
+import userRouter from "./routes/userRouter.js";
+
 
 dotenv.config();
-
 
 const app = express();
 

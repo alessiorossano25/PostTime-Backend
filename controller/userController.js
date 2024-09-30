@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import {Op} from "sequelize";
 import jwt from "jsonwebtoken"; 
+import User from "../models/user.js"
 
 const userController = {
 
@@ -57,11 +58,10 @@ const userController = {
             if (existingUser) {
                 const passwordMatch = await bcrypt.compare(password, existingUser.password)
                 if (passwordMatch) {
-                    // Crea un token JWT
                     const token = jwt.sign(
-                        { userId: existingUser.id }, // payload
-                        process.env.JWT_SECRET, // segreto
-                        { expiresIn: '1h' } // opzioni
+                        { userId: existingUser.id }, 
+                        process.env.JWT_SECRET, 
+                        { expiresIn: '1h' } 
                     );
                     req.session.auth = true
                     res.status(200).json({ message: "Accesso effettuato", token })

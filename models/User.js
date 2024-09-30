@@ -1,8 +1,8 @@
-import Connect1 from "../database/connectDB";
+import database from "../database/connectDB";
 import bcrypt from "bcrypt";
 
 
-const User = Connect1.define('User', {
+const User = database.define('User', {
     nickname: {
         type: DataTypes.STRING,
         allowNull: false
